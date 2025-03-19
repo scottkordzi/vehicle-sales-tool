@@ -11,5 +11,5 @@
     - Broken down by luxury and non-luxury vehicles
 - Difference in selling price across different brands
 - Average selling price with regards to state, condition, and odometer
-
+ 
 ## Model Methodology and Feature Inputs
