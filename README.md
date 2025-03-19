@@ -7,4 +7,9 @@
 
 ## Dashboard Features
 
+- Average selling price of vehicles over the years
+    - Broken down by luxury and non-luxury vehicles
+- Difference in selling price across different brands
+- Average selling price with regards to state / condition / odometer
+
 ## Model Methodology and Feature Inputs
