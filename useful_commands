@@ -1,0 +1,15 @@
+git status
+git add sandbox.py
+git status
+git commit -m "Adding sandbox.py"
+git pull
+git push
+
+# Gives current directory path
+pwd
+
+# Sets /Users/scottkordzi/ as current directory
+cd /Users/scottkordzi/
+
+# Lists everything in current directory
+ls
