@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 plt.style.use("ggplot")
 import matplotlib.colors as mcolors
 
-from utils.data_transfer import pull_kaggle_data
+from utils.data_transfer import (pull_kaggle_data)
 
 vehicle_df = pull_kaggle_data(kaggle_path = "syedanwarafridi/vehicle-sales-data",
                               file_path_suffix = "/car_prices.csv")

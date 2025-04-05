@@ -23,7 +23,7 @@ SELECT vsd.year
      , AVG(vsd.sellingprice) AS avg_selling_price
      -- , vsd.make
      -- , vsd.model
-FROM vehice_sales_data AS vsd
+FROM vehicle_sales_data AS vsd
 WHERE (vsd.year > 2000)
 GROUP BY vsd.year
 -- HAVING AVG(vsd.sellingprice) < 20000
