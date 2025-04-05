@@ -11,58 +11,40 @@ plt.style.use("ggplot")
 import matplotlib.colors as mcolors
 
 from utils.data_transfer import (pull_kaggle_data,
-                                 get_sql_column_datatypes)
+                                 get_create_sql_table_command,
+                                 get_sql_insert_commands,
+                                 import_sql_script,
+                                 SQLiteDataObject)
 
 vehicle_df = pull_kaggle_data(kaggle_path = "syedanwarafridi/vehicle-sales-data",
                               file_path_suffix = "/car_prices.csv")
 
-# stock_df = pull_kaggle_data(kaggle_path = "syedanwarafridi/vehicle-sales-data",
-#                             file_path_suffix = "/car_prices.csv")
+ford_stock_df = pd.read_csv("data_folder/ford_stock_df.csv")
 
-import sqlite3
+vehicle_create_table_command = get_create_sql_table_command(df = vehicle_df, 
+                                                        # database_name = 'tool_data',
+                                                        table_name = 'vehicle_sales_data',
+                                                        primary_key_columns = ['vin', 'saledate', 'sellingprice', 'odometer'])
 
-#! Define connection and cursor
+ford_stock_create_table_command = get_create_sql_table_command(df = ford_stock_df, 
+                                                # database_name = 'tool_data',
+                                                table_name = 'ford_stock_data',
+                                                primary_key_columns = ['year'])
 
-conn = sqlite3.connect("tool_data.db")
+vehicle_insert_commands    = get_sql_insert_commands(df = vehicle_df.copy(deep=True),
+                                                 table_name = 'vehicle_sales_data')
 
-cursor = conn.cursor()
+ford_stock_insert_commands = get_sql_insert_commands(df = ford_stock_df.copy(deep=True),
+                                                 table_name = 'ford_stock_data')
 
-vehicle_str_dtypes = get_sql_column_datatypes(df = vehicle_df.copy(deep = True))
+sqlite_object = SQLiteDataObject(database_name = "tool_data")
 
+sqlite_object.execute_sqlite_commands(commands = [vehicle_create_table_command])
+sqlite_object.execute_sqlite_commands(commands = [ford_stock_create_table_command])
 
-# stock_df = get_sql_column_datatypes(df = stock_df.copy(deep = True))
+sqlite_object.execute_sqlite_commands(commands = vehicle_insert_commands)
+sqlite_object.execute_sqlite_commands(commands = ford_stock_insert_commands)
 
-#! LIST COMPREHENSION
-vehicle_data_type_str = ""
-for col_name, col_type in vehicle_str_dtypes.to_dict().items():
-    vehicle_data_type_str = vehicle_data_type_str + f"{col_name} {col_type}, "
-    
-vehicle_data_type_str = vehicle_data_type_str[:-2]
+dashboard_query = import_sql_script(sql_script_path = 'sql_scripts/dashboard_query.sql')
 
-#! Capitalized objects mean GLOBAL variables
-PRIMARY_KEY_COLUMNS = ['vin', 'saledate', 'sellingprice', 'odometer']
-
-primary_key_col_str = ", ".join(PRIMARY_KEY_COLUMNS)
-
-create_vehicle_sales_table_command = f"""CREATE TABLE IF NOT EXISTS
-    vehice_sales_data ({vehicle_data_type_str},
-        PRIMARY KEY ({primary_key_col_str}))"""
-
-for _, row in vehicle_df.iloc[:50].iterrows():
-
-    iter_insert_str = f"INSERT INTO vehice_sales_data VALUES {tuple(row.values)}"
-    iter_insert_str = iter_insert_str.replace(" nan,", " NULL,")
-    cursor.execute(iter_insert_str)
-
-cursor.execute(create_vehicle_sales_table_command)
-
-vehicle_sales_query = """
-SELECT vin
-     , saledate
-     , sellingprice
-     , make
-     , model
-FROM vehice_sales_data;
-"""
-
-cursor.execute(vehicle_sales_query).fetchall()
+our_hard_begotten_df = sqlite_object.query_from_database(query = dashboard_query) 
