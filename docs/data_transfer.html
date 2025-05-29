@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>data_transfer API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>data_transfer</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="data_transfer.get_create_sql_table_command"><code class="name flex">
+<span>def <span class="ident">get_create_sql_table_command</span></span>(<span>df,<br>table_name='vehicle_sales_data',<br>primary_key_columns=['vin', 'saledate', 'sellingprice', 'odometer'])</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_create_sql_table_command(df, 
+                             table_name = &#39;vehicle_sales_data&#39;,
+                             primary_key_columns = [&#39;vin&#39;, &#39;saledate&#39;, &#39;sellingprice&#39;, &#39;odometer&#39;]):
+    &#34;&#34;&#34;
+    Generates a SQL CREATE TABLE command based on DataFrame column types and specified primary keys.
+
+    Args:
+        df (pandas.DataFrame): The input DataFrame to base the table structure on.
+        table_name (str, optional): Name of the table to create. 
+            Defaults to &#39;vehicle_sales_data&#39;.
+        primary_key_columns (list, optional): List of column names to use as primary keys.
+            Defaults to [&#39;vin&#39;, &#39;saledate&#39;, &#39;sellingprice&#39;, &#39;odometer&#39;].
+
+    Returns:
+        str: A SQL command string to create a table with specified columns and primary keys.
+
+    Notes:
+        - Uses get_sql_column_datatypes() to convert pandas types to SQL types
+        - Creates a composite primary key if multiple columns are specified
+        - Includes &#39;IF NOT EXISTS&#39; clause to prevent errors if table already exists
+
+    Raises:
+        AttributeError: If df is not a pandas DataFrame or lacks required attributes.
+        KeyError: If any primary_key_columns are not present in the DataFrame.
+    &#34;&#34;&#34;
+    df_str_dtypes = get_sql_column_datatypes(df = df)
+
+    #! For loop right now, could be a LIST COMPREHENSION
+    data_type_str = &#34;&#34;
+    for col_name, col_type in df_str_dtypes.to_dict().items():
+        data_type_str = data_type_str + f&#34;{col_name} {col_type}, &#34;
+    
+    data_type_str = data_type_str[:-2]
+
+    primary_key_col_str = &#34;, &#34;.join(primary_key_columns)
+    
+    create_table_command = f&#34;&#34;&#34;CREATE TABLE IF NOT EXISTS
+        {table_name}({data_type_str},
+            PRIMARY KEY ({primary_key_col_str}))&#34;&#34;&#34;
+    
+    return create_table_command</code></pre>
+</details>
+<div class="desc"><p>Generates a SQL CREATE TABLE command based on DataFrame column types and specified primary keys.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
+<dd>The input DataFrame to base the table structure on.</dd>
+<dt><strong><code>table_name</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Name of the table to create.
+Defaults to 'vehicle_sales_data'.</dd>
+<dt><strong><code>primary_key_columns</code></strong> :&ensp;<code>list</code>, optional</dt>
+<dd>List of column names to use as primary keys.
+Defaults to ['vin', 'saledate', 'sellingprice', 'odometer'].</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>A SQL command string to create a table with specified columns and primary keys.</dd>
+</dl>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>Uses get_sql_column_datatypes() to convert pandas types to SQL types</li>
+<li>Creates a composite primary key if multiple columns are specified</li>
+<li>Includes 'IF NOT EXISTS' clause to prevent errors if table already exists</li>
+</ul>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>AttributeError</code></dt>
+<dd>If df is not a pandas DataFrame or lacks required attributes.</dd>
+<dt><code>KeyError</code></dt>
+<dd>If any primary_key_columns are not present in the DataFrame.</dd>
+</dl></div>
+</dd>
+<dt id="data_transfer.get_sql_column_datatypes"><code class="name flex">
+<span>def <span class="ident">get_sql_column_datatypes</span></span>(<span>df)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_sql_column_datatypes(df):
+    &#34;&#34;&#34;
+    Converts pandas DataFrame column data types to SQL-compatible type names.
+
+    Args:
+        df (pandas.DataFrame): The input DataFrame whose column types need to be converted.
+
+    Returns:
+        pandas.Series: A Series containing SQL-compatible data type names indexed by column names.
+
+    Notes:
+        - Converts &#39;int64&#39; to &#39;int&#39;
+        - Converts &#39;float64&#39; to &#39;float&#39;
+        - Converts &#39;object&#39; to &#39;text&#39;
+        - Other pandas data types are returned as strings without modification
+
+    Raises:
+        AttributeError: If the input is not a pandas DataFrame or lacks the dtypes attribute.
+    &#34;&#34;&#34;
+    str_dtypes = df.dtypes.astype(str)
+    str_dtypes = str_dtypes.str.replace(&#34;int64&#34;, &#39;int&#39;)
+    str_dtypes = str_dtypes.str.replace(&#34;float64&#34;, &#39;float&#39;)
+    str_dtypes = str_dtypes.str.replace(&#34;object&#34;, &#39;text&#39;)
+
+    return str_dtypes</code></pre>
+</details>
+<div class="desc"><p>Converts pandas DataFrame column data types to SQL-compatible type names.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
+<dd>The input DataFrame whose column types need to be converted.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pandas.Series</code></dt>
+<dd>A Series containing SQL-compatible data type names indexed by column names.</dd>
+</dl>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>Converts 'int64' to 'int'</li>
+<li>Converts 'float64' to 'float'</li>
+<li>Converts 'object' to 'text'</li>
+<li>Other pandas data types are returned as strings without modification</li>
+</ul>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>AttributeError</code></dt>
+<dd>If the input is not a pandas DataFrame or lacks the dtypes attribute.</dd>
+</dl></div>
+</dd>
+<dt id="data_transfer.get_sql_insert_commands"><code class="name flex">
+<span>def <span class="ident">get_sql_insert_commands</span></span>(<span>df, table_name)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_sql_insert_commands(df, table_name):
+    &#34;&#34;&#34;
+    Generates a list of SQL INSERT commands for each row in a DataFrame.
+
+    Args:
+        df (pandas.DataFrame): The input DataFrame containing data to insert.
+        table_name (str): The name of the target table for insertion.
+
+    Returns:
+        list: A list of SQL INSERT command strings, one for each row in the DataFrame.
+
+    Notes:
+        - Uses &#39;INSERT OR IGNORE&#39; to skip duplicate entries
+        - Converts numpy.float types to Python float
+        - Replaces NaN values with SQL NULL
+        - Assumes column order in DataFrame matches table structure
+
+    Raises:
+        AttributeError: If df is not a pandas DataFrame or lacks required attributes.
+    &#34;&#34;&#34;
+    insert_commands = []
+    for _, row in df.iterrows():
+        # _, row = list(df.iterrows())[0]
+        
+        #! If numpy.float is in the string of element&#39;s TYPE, then convert it
+        #! to a normal Python float. Otherwise, do nothing
+        adjusted_row_values = [float(elem)
+                              if &#39;numpy.float&#39; in str(type(elem)) 
+                              else elem 
+                              for elem in row.values]
+
+        iter_insert_str = f&#34;INSERT OR IGNORE INTO {table_name} VALUES {tuple(adjusted_row_values)}&#34;
+        iter_insert_str = iter_insert_str.replace(&#34; nan,&#34;, &#34; NULL,&#34;
+                                        ).replace(&#34; nan)&#34;, &#34; NULL)&#34;)
+
+        insert_commands.append(iter_insert_str)
+
+    return insert_commands</code></pre>
+</details>
+<div class="desc"><p>Generates a list of SQL INSERT commands for each row in a DataFrame.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>df</code></strong> :&ensp;<code>pandas.DataFrame</code></dt>
+<dd>The input DataFrame containing data to insert.</dd>
+<dt><strong><code>table_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>The name of the target table for insertion.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>list</code></dt>
+<dd>A list of SQL INSERT command strings, one for each row in the DataFrame.</dd>
+</dl>
+<h2 id="notes">Notes</h2>
+<ul>
+<li>Uses 'INSERT OR IGNORE' to skip duplicate entries</li>
+<li>Converts numpy.float types to Python float</li>
+<li>Replaces NaN values with SQL NULL</li>
+<li>Assumes column order in DataFrame matches table structure</li>
+</ul>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>AttributeError</code></dt>
+<dd>If df is not a pandas DataFrame or lacks required attributes.</dd>
+</dl></div>
+</dd>
+<dt id="data_transfer.import_sql_script"><code class="name flex">
+<span>def <span class="ident">import_sql_script</span></span>(<span>sql_script_path)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def import_sql_script(sql_script_path):
+    &#34;&#34;&#34;
+    Reads and returns the contents of a SQL script file.
+
+    Args:
+        sql_script_path (str): The file path to the SQL script to be imported.
+
+    Returns:
+        str: The contents of the SQL script file as a string.
+
+    Raises:
+        FileNotFoundError: If the specified SQL script file cannot be found.
+        IOError: If there&#39;s an error reading the file.
+    &#34;&#34;&#34;
+    with open(sql_script_path, &#39;r&#39;) as sql_file_wrapper:
+        sql_file = sql_file_wrapper.read()
+
+    return sql_file</code></pre>
+</details>
+<div class="desc"><p>Reads and returns the contents of a SQL script file.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>sql_script_path</code></strong> :&ensp;<code>str</code></dt>
+<dd>The file path to the SQL script to be imported.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>str</code></dt>
+<dd>The contents of the SQL script file as a string.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>FileNotFoundError</code></dt>
+<dd>If the specified SQL script file cannot be found.</dd>
+<dt><code>IOError</code></dt>
+<dd>If there's an error reading the file.</dd>
+</dl></div>
+</dd>
+<dt id="data_transfer.pull_kaggle_data"><code class="name flex">
+<span>def <span class="ident">pull_kaggle_data</span></span>(<span>kaggle_path='syedanwarafridi/vehicle-sales-data',<br>file_path_suffix='/car_prices.csv')</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def pull_kaggle_data(kaggle_path = &#34;syedanwarafridi/vehicle-sales-data&#34;,
+                     file_path_suffix = &#34;/car_prices.csv&#34;):
+    &#34;&#34;&#34;
+    Downloads and reads a CSV dataset from Kaggle.
+
+    Args:
+        kaggle_path (str, optional): The Kaggle dataset path in the format &#34;username/dataset-name&#34;.
+            Defaults to &#34;syedanwarafridi/vehicle-sales-data&#34;.
+        file_path_suffix (str, optional): The suffix to append to the downloaded dataset path
+            to locate the specific CSV file. Defaults to &#34;/car_prices.csv&#34;.
+
+    Returns:
+        pandas.DataFrame: A DataFrame containing the data from the CSV file.
+
+    Raises:
+        ImportError: If required libraries (kagglehub or pandas) are not installed.
+        FileNotFoundError: If the specified file cannot be found after download.
+        KaggleApiError: If there&#39;s an issue with the Kaggle API authentication or download.
+    &#34;&#34;&#34;
+    stored_file_path = kagglehub.dataset_download(kaggle_path)
+    file_path = stored_file_path + file_path_suffix
+    df = pd.read_csv(file_path)
+
+    return df</code></pre>
+</details>
+<div class="desc"><p>Downloads and reads a CSV dataset from Kaggle.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>kaggle_path</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>The Kaggle dataset path in the format "username/dataset-name".
+Defaults to "syedanwarafridi/vehicle-sales-data".</dd>
+<dt><strong><code>file_path_suffix</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>The suffix to append to the downloaded dataset path
+to locate the specific CSV file. Defaults to "/car_prices.csv".</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pandas.DataFrame</code></dt>
+<dd>A DataFrame containing the data from the CSV file.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>ImportError</code></dt>
+<dd>If required libraries (kagglehub or pandas) are not installed.</dd>
+<dt><code>FileNotFoundError</code></dt>
+<dd>If the specified file cannot be found after download.</dd>
+<dt><code>KaggleApiError</code></dt>
+<dd>If there's an issue with the Kaggle API authentication or download.</dd>
+</dl></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="data_transfer.SQLiteDataObject"><code class="flex name class">
+<span>class <span class="ident">SQLiteDataObject</span></span>
+<span>(</span><span>database_name='tool_data')</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class SQLiteDataObject:
+    &#34;&#34;&#34;
+    A class to manage SQLite database operations including connection, execution, and querying.
+
+    Attributes:
+        database_name (str): Name of the SQLite database file (without .db extension).
+        base_dir (str): Absolute path to the directory containing the script.
+    &#34;&#34;&#34;
+
+    def __init__(self, database_name = &#34;tool_data&#34;):
+        &#34;&#34;&#34;
+        Initializes the SQLiteDataObject with a database name and base directory.
+
+        Args:
+            database_name (str, optional): Name of the database file without extension.
+                Defaults to &#34;tool_data&#34;.
+        &#34;&#34;&#34;
+        # from types import SimpleNamespace; self = SimpleNamespace()
+        
+        self.database_name = database_name
+        self.base_dir = os.path.dirname(os.path.abspath(__file__))
+        
+    def create_sqlite_conn(self):
+        &#34;&#34;&#34;
+        Creates a connection to the SQLite database.
+
+        Returns:
+            sqlite3.Connection: A connection object to the SQLite database.
+
+        Raises:
+            sqlite3.Error: If the database connection cannot be established.
+        &#34;&#34;&#34;
+        db_path = f&#34;{self.base_dir}/{self.database_name}.db&#34;
+        conn = sqlite3.connect(db_path)
+
+        return conn
+    
+    def execute_sqlite_commands(self, commands):
+        &#34;&#34;&#34;
+        Executes a list of SQL commands on the database.
+
+        Args:
+            commands (list): List of SQL command strings to execute.
+
+        Raises:
+            sqlite3.Error: If any SQL command fails to execute.
+        &#34;&#34;&#34;
+        with self.create_sqlite_conn() as conn:
+            cursor = conn.cursor()
+            for command in commands:
+                cursor.execute(command)
+
+    def query_from_database(self, query):
+        &#34;&#34;&#34;
+        Executes a SQL query and returns results as a pandas DataFrame.
+
+        Args:
+            query (str): SQL query string to execute.
+
+        Returns:
+            pandas.DataFrame: Query results with column names from the database.
+
+        Raises:
+            sqlite3.Error: If the query execution fails.
+            AttributeError: If pandas is not available for DataFrame creation.
+        &#34;&#34;&#34;
+        with self.create_sqlite_conn() as conn:
+            
+            cursor         = conn.cursor()
+            raw_sql_output = cursor.execute(query)
+            row_values     = cursor.fetchall()
+
+        column_values = [_description[0] for _description in raw_sql_output.description]
+        df = pd.DataFrame(data = row_values,
+                          columns = column_values)
+        
+        return df</code></pre>
+</details>
+<div class="desc"><p>A class to manage SQLite database operations including connection, execution, and querying.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>database_name</code></strong> :&ensp;<code>str</code></dt>
+<dd>Name of the SQLite database file (without .db extension).</dd>
+<dt><strong><code>base_dir</code></strong> :&ensp;<code>str</code></dt>
+<dd>Absolute path to the directory containing the script.</dd>
+</dl>
+<p>Initializes the SQLiteDataObject with a database name and base directory.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>database_name</code></strong> :&ensp;<code>str</code>, optional</dt>
+<dd>Name of the database file without extension.
+Defaults to "tool_data".</dd>
+</dl></div>
+<h3>Methods</h3>
+<dl>
+<dt id="data_transfer.SQLiteDataObject.create_sqlite_conn"><code class="name flex">
+<span>def <span class="ident">create_sqlite_conn</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_sqlite_conn(self):
+    &#34;&#34;&#34;
+    Creates a connection to the SQLite database.
+
+    Returns:
+        sqlite3.Connection: A connection object to the SQLite database.
+
+    Raises:
+        sqlite3.Error: If the database connection cannot be established.
+    &#34;&#34;&#34;
+    db_path = f&#34;{self.base_dir}/{self.database_name}.db&#34;
+    conn = sqlite3.connect(db_path)
+
+    return conn</code></pre>
+</details>
+<div class="desc"><p>Creates a connection to the SQLite database.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>sqlite3.Connection</code></dt>
+<dd>A connection object to the SQLite database.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>sqlite3.Error</code></dt>
+<dd>If the database connection cannot be established.</dd>
+</dl></div>
+</dd>
+<dt id="data_transfer.SQLiteDataObject.execute_sqlite_commands"><code class="name flex">
+<span>def <span class="ident">execute_sqlite_commands</span></span>(<span>self, commands)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def execute_sqlite_commands(self, commands):
+    &#34;&#34;&#34;
+    Executes a list of SQL commands on the database.
+
+    Args:
+        commands (list): List of SQL command strings to execute.
+
+    Raises:
+        sqlite3.Error: If any SQL command fails to execute.
+    &#34;&#34;&#34;
+    with self.create_sqlite_conn() as conn:
+        cursor = conn.cursor()
+        for command in commands:
+            cursor.execute(command)</code></pre>
+</details>
+<div class="desc"><p>Executes a list of SQL commands on the database.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>commands</code></strong> :&ensp;<code>list</code></dt>
+<dd>List of SQL command strings to execute.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>sqlite3.Error</code></dt>
+<dd>If any SQL command fails to execute.</dd>
+</dl></div>
+</dd>
+<dt id="data_transfer.SQLiteDataObject.query_from_database"><code class="name flex">
+<span>def <span class="ident">query_from_database</span></span>(<span>self, query)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def query_from_database(self, query):
+    &#34;&#34;&#34;
+    Executes a SQL query and returns results as a pandas DataFrame.
+
+    Args:
+        query (str): SQL query string to execute.
+
+    Returns:
+        pandas.DataFrame: Query results with column names from the database.
+
+    Raises:
+        sqlite3.Error: If the query execution fails.
+        AttributeError: If pandas is not available for DataFrame creation.
+    &#34;&#34;&#34;
+    with self.create_sqlite_conn() as conn:
+        
+        cursor         = conn.cursor()
+        raw_sql_output = cursor.execute(query)
+        row_values     = cursor.fetchall()
+
+    column_values = [_description[0] for _description in raw_sql_output.description]
+    df = pd.DataFrame(data = row_values,
+                      columns = column_values)
+    
+    return df</code></pre>
+</details>
+<div class="desc"><p>Executes a SQL query and returns results as a pandas DataFrame.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>query</code></strong> :&ensp;<code>str</code></dt>
+<dd>SQL query string to execute.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>pandas.DataFrame</code></dt>
+<dd>Query results with column names from the database.</dd>
+</dl>
+<h2 id="raises">Raises</h2>
+<dl>
+<dt><code>sqlite3.Error</code></dt>
+<dd>If the query execution fails.</dd>
+<dt><code>AttributeError</code></dt>
+<dd>If pandas is not available for DataFrame creation.</dd>
+</dl></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="data_transfer.get_create_sql_table_command" href="#data_transfer.get_create_sql_table_command">get_create_sql_table_command</a></code></li>
+<li><code><a title="data_transfer.get_sql_column_datatypes" href="#data_transfer.get_sql_column_datatypes">get_sql_column_datatypes</a></code></li>
+<li><code><a title="data_transfer.get_sql_insert_commands" href="#data_transfer.get_sql_insert_commands">get_sql_insert_commands</a></code></li>
+<li><code><a title="data_transfer.import_sql_script" href="#data_transfer.import_sql_script">import_sql_script</a></code></li>
+<li><code><a title="data_transfer.pull_kaggle_data" href="#data_transfer.pull_kaggle_data">pull_kaggle_data</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="data_transfer.SQLiteDataObject" href="#data_transfer.SQLiteDataObject">SQLiteDataObject</a></code></h4>
+<ul class="">
+<li><code><a title="data_transfer.SQLiteDataObject.create_sqlite_conn" href="#data_transfer.SQLiteDataObject.create_sqlite_conn">create_sqlite_conn</a></code></li>
+<li><code><a title="data_transfer.SQLiteDataObject.execute_sqlite_commands" href="#data_transfer.SQLiteDataObject.execute_sqlite_commands">execute_sqlite_commands</a></code></li>
+<li><code><a title="data_transfer.SQLiteDataObject.query_from_database" href="#data_transfer.SQLiteDataObject.query_from_database">query_from_database</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>
