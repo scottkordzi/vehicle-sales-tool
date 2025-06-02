@@ -78,6 +78,6 @@ jobs:
         uses: azure/webapps-deploy@v3
         id: deploy-to-webapp
         with:
-          app-name: 'apinsights'
+          app-name: 'apinsights-cmbpchcweneyffgs'
           slot-name: 'Production'
           
