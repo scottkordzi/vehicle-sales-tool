@@ -63,9 +63,6 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-
-      - name: Enable debug logging
-      - run: echo "AZURE_CLI_DEBUG=true" >> $GITHUB_ENV
       
       - name: Login to Azure
         uses: azure/login@v2
