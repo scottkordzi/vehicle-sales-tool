@@ -154,10 +154,12 @@ plot_object = PlotObject(df = YEAR_PLOT_DF.copy(deep=True))
 
 app = dash.Dash(__name__,
                 external_stylesheets = [
-                    'assets/style.css',
+                    '/assets/style.css',
                     'https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap'
                                         ], 
-                external_scripts = ['assets/script.js'])
+                external_scripts = ['/assets/script.js'])
+
+server = app.server
 
 app.layout = html.Div([
     html.Img(src = "https://www.ford.com/content/dam/brand_ford/en_us/brand/performance/gt/gallery/3_2/FRD_GT_000005.jpg/jcr:content/renditions/cq5dam.web.1440.1440.jpeg",
@@ -363,4 +365,5 @@ def update_multiline_plot(start_date, end_date):
     return plot_object.create_multiline_plot()
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    import os
+    app.run(host = '0.0.0.0', port = int(os.environ.get('PORT', 8000)), debug = False)
