@@ -5,7 +5,7 @@ name: "vehicle-sales-tool"
 on:
   push:
     branches:
-      - iac-actions
+      - main
     paths:  
       - terraform/**
   workflow_dispatch: # Enables manual trigger for destroy job
