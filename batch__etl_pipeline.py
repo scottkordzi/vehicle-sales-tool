@@ -1,9 +1,5 @@
-#! A **batch** process is a process that runs every day, week, or whatever
-#! An ETL pipeline is for getting our data
-    #! ETL stands for Extract, Transform, Load
-
-import pandas as pd # Python's Excel -- we'll reference it with pd
-import numpy as np # Way to do lots and lots of math -- we'll reference it with np
+import pandas as pd 
+import numpy as np 
 
 from utils.data_transfer import (pull_kaggle_data,
                                  get_create_sql_table_command,
