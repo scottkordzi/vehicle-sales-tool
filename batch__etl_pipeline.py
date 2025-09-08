@@ -10,15 +10,15 @@ from utils.data_transfer import (pull_kaggle_data,
                                  get_sql_insert_commands,
                                  SQLiteDataObject)
 
-vehicle_df = pull_kaggle_data(kaggle_path = "syedanwarafridi/vehicle-sales-data",
-                              file_path_suffix = "/car_prices.csv")
+vehicle_df    = pull_kaggle_data(kaggle_path = "syedanwarafridi/vehicle-sales-data",
+                                 file_path_suffix = "/car_prices.csv")
 
 ford_stock_df = pd.read_csv("data_folder/ford_stock_df.csv")
 
-vehicle_create_table_command = get_create_sql_table_command(df = vehicle_df, 
-                                                            # database_name = 'tool_data',
-                                                            table_name = 'vehicle_sales_data',
-                                                            primary_key_columns = ['vin', 'saledate', 'sellingprice', 'odometer'])
+vehicle_create_table_command    = get_create_sql_table_command(df = vehicle_df, 
+                                                               # database_name = 'tool_data',
+                                                               table_name = 'vehicle_sales_data',
+                                                               primary_key_columns = ['vin', 'saledate', 'sellingprice', 'odometer'])
 
 ford_stock_create_table_command = get_create_sql_table_command(df = ford_stock_df, 
                                                                 # database_name = 'tool_data',
