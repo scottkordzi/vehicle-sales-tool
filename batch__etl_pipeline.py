@@ -14,12 +14,10 @@ ford_stock_df = pd.read_csv("data_folder/ford_stock_df.csv")
 auto_sales_df = pd.read_csv("data_folder/2024_us_auto_sales.csv")
 
 vehicle_create_table_command    = get_create_sql_table_command(df = vehicle_df, 
-                                                               # database_name = 'tool_data',
                                                                table_name = 'vehicle_sales_data',
                                                                primary_key_columns = ['vin', 'saledate', 'sellingprice', 'odometer'])
 
 ford_stock_create_table_command = get_create_sql_table_command(df = ford_stock_df, 
-                                                                # database_name = 'tool_data',
                                                                 table_name = 'ford_stock_data',
                                                                 primary_key_columns = ['year'])
 

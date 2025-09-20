@@ -3,9 +3,6 @@ import kagglehub
 import sqlite3
 import os
 
-#! Read each function through Grok and generate a DOC STRING describing what
-#! each one does
-
 def import_sql_script(sql_script_path):
     """
     Reads and returns the contents of a SQL script file.
@@ -106,7 +103,6 @@ def get_create_sql_table_command(df,
     """
     df_str_dtypes = get_sql_column_datatypes(df = df)
 
-    #! For loop right now, could be a LIST COMPREHENSION
     data_type_str = ""
     for col_name, col_type in df_str_dtypes.to_dict().items():
         data_type_str = data_type_str + f"{col_name} {col_type}, "
@@ -143,11 +139,8 @@ def get_sql_insert_commands(df, table_name):
         AttributeError: If df is not a pandas DataFrame or lacks required attributes.
     """
     insert_commands = []
-    for _, row in df.iterrows():
-        # _, row = list(df.iterrows())[0]
-        
-        #! If numpy.float is in the string of element's TYPE, then convert it
-        #! to a normal Python float. Otherwise, do nothing
+    for _, row in df.iterrows():        
+
         adjusted_row_values = [float(elem)
                               if 'numpy.float' in str(type(elem)) 
                               else elem 
@@ -179,7 +172,6 @@ class SQLiteDataObject:
             database_name (str, optional): Name of the database file without extension.
                 Defaults to "tool_data".
         """
-        # from types import SimpleNamespace; self = SimpleNamespace()
         
         self.database_name = database_name
         self.base_dir = os.path.dirname(os.path.abspath(__file__))
