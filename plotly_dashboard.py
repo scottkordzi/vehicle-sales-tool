@@ -23,7 +23,10 @@ NAV_BUTTONS = [{'nav'   : 'About',
                 'value' : 'scatter'},
                {'nav'   : 'Price Analysis Subplots',
                 'id'    : 'nav-multiline',
-                'value' : 'multiline'}]
+                'value' : 'multiline'},
+                {'nav'   : 'Auto Sales Comparison',
+                 'id'    : 'nav-compared',
+                 'value' : 'compared'}]
 
 DATE_PICKER = [{'id'         : 'year',
                 'start_date' : date(2000, 1, 1),
@@ -34,9 +37,15 @@ DATE_PICKER = [{'id'         : 'year',
 
 DASHBOARD_QUERY = import_sql_script(sql_script_path = 'sql_scripts/dashboard_query.sql')
 
+AUTO_SALES_QUERY = import_sql_script(sql_script_path='sql_scripts/auto_sales_query.sql')
+
 SQLITE_OBJECT = SQLiteDataObject(database_name = "tool_data")
 
-DASHBOARD_DF = SQLITE_OBJECT.query_from_database(query = DASHBOARD_QUERY) 
+DASHBOARD_DF = SQLITE_OBJECT.query_from_database(query = DASHBOARD_QUERY)
+
+AUTO_SALES_DF = SQLITE_OBJECT.query_from_database(query = AUTO_SALES_QUERY)
+
+AUTO_SALES_DF['Manufacturer'] = AUTO_SALES_DF['Manufacturer'].str.replace(r'^\d+\.\s*', '', regex = True).str.strip()
 
 FLOAT_COLS = [col for col, _dtype in DASHBOARD_DF.dtypes.items()
                   if (('float' in str(_dtype)) and
@@ -50,9 +59,9 @@ YEAR_PLOT_DF['price_difference'] = YEAR_PLOT_DF["sellingprice"] - YEAR_PLOT_DF["
 
 class PlotObject():
 
-    def __init__(self, df):
-        # from types import SimpleNamespace; self = SimpleNamespace()
+    def __init__(self, df, auto_sales_df=None):
         self.df = df
+        self.auto_sales_df = auto_sales_df
     
     def create_bar_plot(self):
 
@@ -95,6 +104,29 @@ class PlotObject():
                                    title_x = 0.5)
         
         return scatter_plot
+    
+    def create_bar_chart(self):
+
+        sorted_df = self.auto_sales_df.sort_values(by = 'percent_change_2023', ascending = True)
+
+        bar_chart = px.bar(sorted_df,
+                           x = 'sales_numbers',
+                           y = 'percent_change_2023',
+                           title = '2024 U.S. Auto Sales by Manufacturer',
+                           color_discrete_sequence = px.colors.qualitative.Plotly,
+                           opacity = 0.7)
+        
+        bar_chart.update_layout(xaxis_title = 'Sales Volume',
+                                yaxis_title = 'Percent Change 2023 (%)',
+                                template = 'plotly_dark',
+                                height = 700,
+                                width = 1000,
+                                title_x = 0.5,
+                                xaxis_tickangle = 45,
+                                showlegend = True,
+                                bargap = 0.2)
+
+        return bar_chart
     
     def create_multiline_plot(self,
                               variable_name_dict = {'sellingprice'     : 'Selling Price',
@@ -148,7 +180,7 @@ class PlotObject():
         return fig
 
 
-plot_object = PlotObject(df = YEAR_PLOT_DF.copy(deep=True))
+plot_object = PlotObject(df=YEAR_PLOT_DF.copy(deep = True), auto_sales_df = AUTO_SALES_DF.copy(deep = True))
 
 # DASH -------------------------------------------------------------------------------------
 
@@ -196,14 +228,16 @@ app.layout = html.Div([
     [Input('nav-about', 'n_clicks'),
      Input('nav-bar', 'n_clicks'),
      Input('nav-scatter', 'n_clicks'),
-     Input('nav-multiline', 'n_clicks')],
+     Input('nav-multiline', 'n_clicks'),
+     Input('nav-compared', 'n_clicks')],
     prevent_initial_call = True
 )
 
 def update_selection(about_clicks,
-                      bar_clicks,
-                      scatter_clicks,
-                      multiline_clicks
+                     bar_clicks,
+                     scatter_clicks,
+                     multiline_clicks,
+                     compared_clicks
                      ):
 
     ctx = dash.callback_context
@@ -218,6 +252,8 @@ def update_selection(about_clicks,
         return 'scatter'
     elif triggered_id == 'nav-multiline':
         return 'multiline'
+    elif triggered_id == 'nav-compared':
+        return 'compared'
 
 @app.callback(
     Output('plot-container', 'children'),
@@ -281,7 +317,8 @@ def update_plot(plot_selection):
                         className = 'fade-in'),
                 ], className = 'scatter-text-container'),
                 html.Div([
-                    dcc.Graph(figure = plot_object.create_scatter_plot(),
+                    dcc.Graph(id = 'scatter-plot',
+                            figure = plot_object.create_scatter_plot(),
                             style = {'width'        : '1000px',
                                      'margin-right' : '100px'})
                 ], style = {'background-color' : '#232323',
@@ -332,6 +369,24 @@ def update_plot(plot_selection):
             dcc.Graph(id = 'multiline-plot',
                        figure = plot_object.create_multiline_plot(),
                        style = {'margin' : '-1492px 399px'}),
+        ]
+    elif plot_selection == 'compared':
+        return [
+            html.Div([
+                html.Div([
+                    html.H2("2024 to 2023 Auto Sales Comparison",
+                            className = 'fade-in'),
+                    html.P("The provided data ranks U.S. auto manufacturers by 2024 sales volume (in units), with percentage changes from 2023. Overall, the market shows modest growth, with most brands posting gains amid recovering demand post-pandemic.",
+                        className = 'fade-in'),
+                ], className = 'scatter-text-container'),
+                html.Div([
+                    dcc.Graph(id = 'bar-chart',
+                            figure = plot_object.create_bar_chart(),
+                            style = {'width'        : '1000px',
+                                     'margin-right' : '100px'})
+                ], style = {'background-color' : '#232323',
+                            'margin'           : '-266px 399px'})
+            ])
         ]
 
 @app.callback(
