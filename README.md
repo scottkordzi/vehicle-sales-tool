@@ -45,13 +45,13 @@ Odometer: Impact of mileage on vehicle value.
 
 ## Technologies Used
 
-Frontend: HTML, CSS, JavaScript (e.g., React for the dashboard)
+Frontend: HTML, CSS, JavaScript, Dash (e.g., React for the dashboard)
 Backend: Python (e.g., Flask or Django for API and data processing)
 Data Analysis: Pandas, NumPy
 Machine Learning: Scikit-learn for the predictive model
 Data Visualization: Plotly, D3.js, or Chart.js
 Database: SQLite or PostgreSQL for storing vehicle data
-Data Sources: Public APIs or datasets (e.g., Kelley Blue Book, Edmunds, or scraped data)
+Data Sources: Public APIs or datasets
 
 ## Installation
 To set up the project locally, follow these steps:
